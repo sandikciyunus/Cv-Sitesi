@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<form>
+    <div class="form-group">
+        <label for="okulAdi">Okul Adı</label>
+        <input type="text" class="form-control" id="okulAdi">
+    </div>
+
+    <div class="form-group">
+        <label for="fakülteAdi">Fakülte Adı</label>
+        <input type="text" class="form-control" id="fakülteAdi">
+    </div>
+
+    <div class="form-group">
+        <label for="bolum">Bölüm</label>
+        <input type="text" class="form-control" id="bolum">
+    </div>
+
+    <div class="form-group">
+        <label for="baslamaTarihi">Başlama Tarihi</label>
+        <input type="text" class="form-control" id="baslamaTarihi">
+    </div>
+
+    <div class="form-group">
+        <label for="bitisTarihi">Bitiş Tarihi</label>
+        <input type="text" class="form-control" id="bitisTarihi">
+    </div>
+
+    <div class="form-group">
+        <label for="ortalama">Ortalama</label>
+        <input type="text" class="form-control" id="ortalama">
+    </div>
+
+
+    <button type="button" onclick="window.history.back()" class="btn btn-danger">Geri</button>
+    <button type="button" onclick="ekle()" class="btn btn-primary">Ekle</button>
+</form>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+
+<script>
+  
+
+    function ekle() {
+        var okulAdi = $("#okulAdi").val();
+        var fakülteAdi = $("#fakülteAdi").val();
+        var bolum = $("#bolum").val();
+        var ortalama = $("#ortalama").val();
+        var baslamaTarihi = $("#baslamaTarihi").val();
+        var bitisTarihi = $("#bitisTarihi").val();
+        if (okulAdi == "" || fakülteAdi == "" || bolum == "" || ortalama=="") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Uyarı',
+                text: 'Lütfen tüm alanları doldurunuz',
+                confirmButtonText: "Tamam"
+            })
+        } else {
+            $.post("https://localhost:44309/Education/storeAdd", {
+                "Title": okulAdi,
+                "SubTitle": fakülteAdi,
+                "Description": bolum,
+                "GPA": ortalama,
+                "StartDate": baslamaTarihi,
+                "EndDate": bitisTarihi
+            }, function (res) {
+                Swal.fire({
+                    title: "Başarılı",
+                    text: res,
+                    confirmButtonText: `Tamam`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "https://localhost:44309/Education/Index"
+                    }
+                })
+            })
+        }
+    }
+</script>

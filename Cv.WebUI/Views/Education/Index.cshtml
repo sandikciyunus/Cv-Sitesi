@@ -1,0 +1,72 @@
+﻿@model Cv.WebUI.Models.EducationListViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<a href="/Education/Add" style="margin-bottom:10px;" class="btn btn-info">Ekle</a>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Okul Adı</th>
+        <th>Fakülte</th>
+        <th>Bölüm</th>
+        <th>Başlama Tarihi</th>
+        <th>Bitiş Tarihi</th>
+        <th>Ortalama</th>
+        <th>İşlemler</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model.Educations)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.SubTitle</td>
+                <td>@item.Description</td>
+                <td>@item.StartDate</td>
+                <td>@item.EndDate</td>
+                <td>@item.GPA</td>
+                <td>
+                    <button type="button" onclick="sil(@item.Id)" class="btn btn-danger">Sil</button>
+                    <a href="/Education/Update?id=@item.Id" class="btn btn-success">Güncelle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    function sil(id) {
+        Swal.fire({
+            title: 'Uyarı',
+            text:"Silmek istediğinize emin misiniz?",
+            showDenyButton: true,
+            confirmButtonText: `Evet`,
+            denyButtonText: `Hayır`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $.post("https://localhost:44309/Education/Delete", {
+                    "Id": id
+                }, function (res) {
+                        Swal.fire({
+                            title: "Başarılı",
+                            text: res,
+                            confirmButtonText: `Tamam`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload();
+                            }
+                        })
+                })
+            } else if (result.isDenied) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Uyarı',
+                    text: 'Silme işlemi iptal edildi',
+                    confirmButtonText: "Tamam"
+                })
+            }
+        })
+    }
+</script>

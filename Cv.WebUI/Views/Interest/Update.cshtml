@@ -1,0 +1,50 @@
+﻿@model Cv.WebUI.Models.InterestUpdateViewModel
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<form>
+    <input type="text" id="id" hidden value="@Model.Interest.Id" />
+    <div class="form-group">
+        <label for="aciklama">Sertifika Adı</label>
+        <input type="text" value="@Model.Interest.Description" class="form-control" id="aciklama">
+    </div>
+
+
+    <button type="button" onclick="window.history.back()" class="btn btn-danger">Geri</button>
+    <button type="button" onclick="guncelle()" class="btn btn-success">Güncelle</button>
+</form>
+
+<script>
+
+    function guncelle() {
+        var aciklama = $("#aciklama").val();
+        var id = $("#id").val();
+        if (aciklama == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Uyarı',
+                text: 'Hobi adı boş bırakılamaz',
+                confirmButtonText: "Tamam"
+            })
+        } else {
+            $.post("https://localhost:44309/Interest/storeUpdate", {
+                "Id":id,
+                "Description": aciklama
+            }, function (res) {
+                Swal.fire({
+                    title: "Başarılı",
+                    text: res,
+                    confirmButtonText: `Tamam`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "https://localhost:44309/Interest/Index"
+                    }
+                })
+            })
+        }
+    }
+</script>
+

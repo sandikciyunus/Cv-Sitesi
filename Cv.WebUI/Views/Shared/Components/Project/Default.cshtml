@@ -1,0 +1,16 @@
+﻿@model Cv.WebUI.Models.ProjectListViewModel
+
+
+<div class="resume-section-content">
+    <h2 class="mb-5">Yaptığım Projeler</h2>
+    <ul class="fa-ul mb-0">
+        @foreach (var item in Model.Projects)
+        {
+            <li>
+                <span class="fa-li"><i class="fas fa-check"></i></span>
+                @item.Name (<a href="@item.Link" target="_blank">Projeye Git</a>)
+            </li>
+        }
+
+    </ul>
+</div>

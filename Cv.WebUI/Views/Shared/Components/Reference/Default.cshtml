@@ -1,0 +1,17 @@
+﻿@model Cv.WebUI.Models.ReferenceListViewModel
+
+<div class="resume-section-content">
+    <h2 class="mb-5">Referanslarım</h2>
+    @foreach (var item in Model.References)
+    {
+        <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+            <div class="flex-grow-1">
+                <h3 class="mb-0">@item.FullName</h3>
+                <div class="subheading mb-3">@item.PhoneNumber</div>
+                <p>Ünvan: @item.Unvan</p>
+
+            </div>
+        </div>
+    }
+
+</div>

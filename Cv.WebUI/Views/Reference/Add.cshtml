@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<form>
+    <div class="form-group">
+        <label for="name">Referans Adı</label>
+        <input type="text" class="form-control" id="name">
+    </div>
+     <div class="form-group">
+        <label for="unvan">Referans Ünvan</label>
+        <input type="text" class="form-control" id="unvan">
+    </div>
+    
+    <div class="form-group">
+        <label for="telno">Referans Telefon Numarası</label>
+        <input type="text" class="form-control" id="telno">
+    </div>
+
+
+    <button type="button" onclick="window.history.back()" class="btn btn-danger">Geri</button>
+    <button type="button" onclick="ekle()" class="btn btn-primary">Ekle</button>
+</form>
+
+<script>
+
+    function ekle() {
+        var name = $("#name").val();
+        var unvan = $("#unvan").val();
+        var telno = $("#telno").val();
+        if (name == "" || unvan == "" || telno=="") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Uyarı',
+                text: 'Tüm alanları doldurunuz',
+                confirmButtonText: "Tamam"
+            })
+        } else {
+            $.post("https://localhost:44309/Reference/storeAdd", {
+                "FullName": name,
+                "Unvan": unvan,
+                "PhoneNumber": telno
+            }, function (res) {
+                    Swal.fire({
+                        title: "Başarılı",
+                        text:res,
+                        confirmButtonText: `Tamam`,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href ="https://localhost:44309/Reference/Index"
+                        }
+                    })
+            })
+        }
+    }
+</script>

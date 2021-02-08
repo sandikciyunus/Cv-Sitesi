@@ -1,0 +1,64 @@
+﻿@model Cv.WebUI.Models.SkillListViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<br />
+<a href="/Skill/Add" style="margin-bottom:10px;" class="btn btn-info">Ekle</a>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Yetenek Adı</th>
+        <th>İşlemler</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model.Skills)
+        {
+            <tr>
+                <td>@item.Description</td>
+                <td>
+                    <button type="button" onclick="sil(@item.Id)" class="btn btn-danger">Sil</button>
+                    <a href="/Skill/Update?id=@item.Id" class="btn btn-success">Güncelle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function sil(id) {
+        Swal.fire({
+            title: 'Uyarı',
+            text: "Silmek istediğinize emin misiniz?",
+            showDenyButton: true,
+            confirmButtonText: `Evet`,
+            denyButtonText: `Hayır`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $.post("https://localhost:44309/Skill/delete", {
+                    "Id": id
+                }, function (res) {
+                    Swal.fire({
+                        title: "Başarılı",
+                        text: res,
+                        confirmButtonText: `Tamam`,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload();
+                        }
+                    })
+                })
+            } else if (result.isDenied) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Uyarı',
+                    text: 'Yetenek silme iptal edildi',
+                    confirmButtonText: "Tamam"
+                })
+            }
+        })
+    }
+</script>

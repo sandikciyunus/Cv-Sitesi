@@ -1,0 +1,58 @@
+﻿@model Cv.WebUI.Models.ProjectUpdateViewModel
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<form>
+    <input type="text" hidden id="id" value="@Model.Project.Id" />
+    <div class="form-group">
+        <label for="name">Proje Adı</label>
+        <input type="text" class="form-control" id="name" value="@Model.Project.Name">
+    </div>
+
+    <div class="form-group">
+        <label for="link">Proje Linki</label>
+        <input type="text" class="form-control" id="link" value="@Model.Project.Link">
+    </div>
+
+
+    <button type="button" onclick="window.history.back()" class="btn btn-danger">Geri</button>
+    <button type="button" onclick="guncelle()" class="btn btn-success">Güncelle</button>
+</form>
+<script>
+
+    function guncelle() {
+        var id = $("#id").val();
+        var name = $("#name").val();
+        var link = $("#link").val();
+        if (name == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Uyarı',
+                text: 'Proje adı boş bırakılamaz',
+                confirmButtonText: "Tamam"
+            })
+        } else {
+            $.post("https://localhost:44309/Project/storeUpdate", {
+                "Id":id,
+                "Name": name,
+                "Link":link
+            }, function (res) {
+                Swal.fire({
+                    title: "Başarılı",
+                    text: res,
+                    confirmButtonText: `Tamam`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "https://localhost:44309/Project/Index"
+                    }
+                })
+            })
+        }
+    }
+</script>
+
+
+

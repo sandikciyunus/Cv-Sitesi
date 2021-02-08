@@ -1,0 +1,78 @@
+﻿@model Cv.WebUI.Models.AppUserListViewModel;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<form class="form-group">
+    <input type="text" hidden value="@Model.Id" id="userId" />
+    <label>Ad:</label>
+    <input type="text" id="ad" value="@Model.FirstName" class="form-control" disabled />
+
+    <label>Soyad:</label>
+    <input type="text" id="soyad" value="@Model.LastName" class="form-control" disabled />
+
+    <label>Telefon Numarası:</label>
+    <input type="text" id="telno" value="@Model.PhoneNumber" class="form-control"  />
+
+    <label>Kullanıcı Adı:</label>
+    <input type="text" id="kad" value="@Model.UserName" class="form-control" />
+
+    <label>Şifre:</label>
+    <input type="password" id="sifre" value="@Model.Password" class="form-control" />
+
+    <label>Adres:</label>
+    <input type="text" id="adres" value="@Model.Address" class="form-control" />
+
+    <label>Email:</label>
+    <input type="text" id="mail" value="@Model.Email" class="form-control" />
+
+    <label>Resim Linki:</label>
+    <input type="text" id="resim" value="@Model.ImageUrl" class="form-control" />
+
+    <label>Github Linki:</label>
+    <input type="text" id="githubLink" value="@Model.GithubLink" class="form-control" />
+
+    <label>Linkedin Linki:</label>
+    <input type="text" id="linkedinLink" value="@Model.LınkedinLink" class="form-control" />
+
+    <label>Açıklama:</label>
+    <textarea class="form-control" id="aciklama" rows="3">@Model.ShortDescription</textarea>
+
+    <br />
+    <button onclick="guncelle()" type="button" class="btn btn-success">Güncelle</button>
+
+</form>
+
+<script>
+    function guncelle() {
+        $.post("https://localhost:44309/Home/update", {
+            "Id": $("#userId").val(),
+            "FirstName": $("#ad").val(),
+            "LastName": $("#soyad").val(),
+            "Address": $("#adres").val(),
+            "Email": $("#mail").val(),
+            "ImageUrl": $("#resim").val(),
+            "UserName": $("#kad").val(),
+            "Password": $("#sifre").val(),
+            "ShortDescription": $("#aciklama").val(),
+            "GithubLink": $("#githubLink").val(),
+            "LınkedinLink": $("#linkedinLink").val(),
+            "PhoneNumber":$("#telno").val()
+        }, function (res) {
+                Swal.fire({
+                    title: "Başarılı",
+                    text: res,
+                    confirmButtonText: `Tamam`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                })
+        })
+    }
+
+  
+</script>
+

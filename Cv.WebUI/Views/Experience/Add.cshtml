@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<form>
+    <div class="form-group">
+        <label for="isyeriAdi">İş Yeri Adı</label>
+        <input type="text" class="form-control" id="isyeriAdi">
+    </div>
+
+    <div class="form-group">
+        <label for="gorev">Görev</label>
+        <input type="text" class="form-control" id="gorev">
+    </div>
+
+    <div class="form-group">
+        <label for="aciklama">Açıklama</label>
+        <textarea class="form-control" rows="3" id="aciklama"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="baslamaTarihi">Başlama Tarihi</label>
+        <input type="text" class="form-control" id="baslamaTarihi">
+    </div>
+
+    <div class="form-group">
+        <label for="bitisTarihi">Bitiş Tarihi</label>
+        <input type="text" class="form-control" id="bitisTarihi">
+    </div>
+
+    <button type="button" onclick="window.history.back()" class="btn btn-danger">Geri</button>
+    <button type="button" onclick="ekle()"  class="btn btn-primary">Ekle</button>
+</form>
+
+<script>
+    function ekle() {
+        var isyeriAdi = $("#isyeriAdi").val();
+        var gorev = $("#gorev").val();
+        var aciklama = $("#aciklama").val();
+        var baslamaTarihi = $("#baslamaTarihi").val();
+        var bitisTarihi = $("#bitisTarihi").val();
+
+        if (isyeriAdi == "" || gorev == "" || aciklama == "" || baslamaTarihi == "" || bitisTarihi == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Uyarı',
+                text: 'Tüm alanları doldurunuz',
+                confirmButtonText: "Tamam"
+            })
+        } else {
+            $.post("https://localhost:44309/Experience/storeAdd", {
+                "Title": isyeriAdi,
+                "SubTitle": gorev,
+                "Description": aciklama,
+                "StartDate": baslamaTarihi,
+                "EndDate": bitisTarihi
+
+            }, function (res) {
+                    Swal.fire({
+                        title: "Başarılı",
+                        text: res,
+                        confirmButtonText: `Tamam`,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "https://localhost:44309/Experience/Index"
+                        }
+                    })
+            })
+        }
+    }
+</script>

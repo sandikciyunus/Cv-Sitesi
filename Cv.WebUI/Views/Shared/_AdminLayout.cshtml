@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin Paneli</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/AdminTema/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/AdminTema/css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Admin Paneli </div>
+            <div class="list-group list-group-flush">
+                <a href="/Home/Index" class="list-group-item list-group-item-action bg-light">Kullanıcı Bilgileri</a>
+                <a href="/Certification/Index" class="list-group-item list-group-item-action bg-light">Sertifikalar</a>
+                <a href="/Education/Index" class="list-group-item list-group-item-action bg-light">Eğitim Bilgileri</a>
+                <a href="/Experience/Index" class="list-group-item list-group-item-action bg-light">Deneyimlerim</a>
+                <a href="/Interest/Index" class="list-group-item list-group-item-action bg-light">İlgi Alanlarım</a>
+                <a href="/Skill/Index" class="list-group-item list-group-item-action bg-light">Yeteneklerim</a>
+                <a href="/Project/Index" class="list-group-item list-group-item-action bg-light">Yaptığım Projeler</a>
+                <a href="/Reference/Index" class="list-group-item list-group-item-action bg-light">Referanslar</a>
+                <a href="/Auth/LogOut" class="list-group-item list-group-item-action bg-light">Çıkış Yap</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-primary" id="menu-toggle">Menü</button>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </nav>
+
+
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/AdminTema/vendor/jquery/jquery.min.js"></script>
+    <script src="~/AdminTema/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+   
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });</script>
+
+</body>
+
+</html>

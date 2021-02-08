@@ -1,0 +1,48 @@
+﻿@model Cv.WebUI.Models.AppUserLoginModel
+@{
+    Layout = null;
+}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
+    <title>Admin Paneli Giriş</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Favicons -->
+    <!-- Custom styles for this template -->
+
+    <link href="~/css/signin.css" rel="stylesheet" />
+</head>
+<body class="text-center">
+
+    <main class="form-signin">
+        <form asp-action="Login" method="post">
+            <h1 class="h3 mb-3 fw-normal">Giriş Yapın</h1>
+            <input asp-for="UserName" type="text" class="form-control" placeholder="Kullanıcı Adı" autofocus>
+            <span asp-validation-for="UserName" class="text-danger"></span>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Şifre">
+            <span asp-validation-for="Password" class="text-danger"></span>
+           
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Giriş Yap</button>
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+
+            </div>
+            <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+        </form>
+    </main>
+
+
+</body>
+</html>

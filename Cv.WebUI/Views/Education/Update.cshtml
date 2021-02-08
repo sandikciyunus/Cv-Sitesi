@@ -1,0 +1,86 @@
+﻿@model Cv.WebUI.Models.EducationUpdateViewModel
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<form>
+    <input  type="text" hidden id="id" value="@Model.Education.Id"/>
+    <div class="form-group">
+        <label for="okulAdi">Okul Adı</label>
+        <input type="text" class="form-control" id="okulAdi" value="@Model.Education.Title">
+    </div>
+
+    <div class="form-group">
+        <label for="fakülteAdi">Fakülte Adı</label>
+        <input type="text" class="form-control" id="fakülteAdi" value="@Model.Education.SubTitle">
+    </div>
+
+    <div class="form-group">
+        <label for="bolum">Bölüm</label>
+        <input type="text" class="form-control" id="bolum" value="@Model.Education.Description">
+    </div>
+
+    <div class="form-group">
+        <label for="baslamaTarihi">Başlama Tarihi</label>
+        <input type="text" class="form-control" id="baslamaTarihi" value="@Model.Education.StartDate">
+    </div>
+
+    <div class="form-group">
+        <label for="bitisTarihi">Bitiş Tarihi</label>
+        <input type="text" class="form-control" id="bitisTarihi" value="@Model.Education.EndDate">
+    </div>
+
+    <div class="form-group">
+        <label for="ortalama">Ortalama</label>
+        <input type="text" class="form-control" id="ortalama" value="@Model.Education.GPA">
+    </div>
+
+
+    <button type="button" onclick="window.history.back()" class="btn btn-danger">Geri</button>
+    <button type="button" onclick="guncelle()"  class="btn btn-success">Güncelle</button>
+</form>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+
+<script>
+   
+    function guncelle() {
+        var id = $("#id").val();
+        var okulAdi = $("#okulAdi").val();
+        var fakülteAdi = $("#fakülteAdi").val();
+        var bolum = $("#bolum").val();
+        var ortalama = $("#ortalama").val();
+        var baslamaTarihi = $("#baslamaTarihi").val();
+        var bitisTarihi = $("#bitisTarihi").val();
+        if (okulAdi == "" || fakülteAdi == "" || bolum == "" || ortalama=="") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Uyarı',
+                text: 'Lütfen tüm alanları doldurunuz',
+                confirmButtonText: "Tamam"
+            })
+        } else {
+            $.post("https://localhost:44309/Education/storeUpdate", {
+                "Id":id,
+                "Title": okulAdi,
+                "SubTitle": fakülteAdi,
+                "Description": bolum,
+                "GPA": ortalama,
+                "StartDate": baslamaTarihi,
+                "EndDate": bitisTarihi
+            }, function (res) {
+                Swal.fire({
+                    title: "Başarılı",
+                    text: res,
+                    confirmButtonText: `Tamam`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "https://localhost:44309/Education/Index"
+                    }
+                })
+            })
+        }
+    }
+</script>
+

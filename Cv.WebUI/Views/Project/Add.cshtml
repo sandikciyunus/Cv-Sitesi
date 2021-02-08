@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<form>
+    <div class="form-group">
+        <label for="name">Proje Adı</label>
+        <input type="text" class="form-control" id="name">
+    </div>
+
+    <div class="form-group">
+        <label for="link">Proje Linki</label>
+        <input type="text" class="form-control" id="link">
+    </div>
+
+
+    <button type="button" onclick="window.history.back()" class="btn btn-danger">Geri</button>
+    <button type="button" onclick="ekle()" class="btn btn-primary">Ekle</button>
+</form>
+<script>
+
+    function ekle() {
+        var name = $("#name").val();
+        var link = $("#link").val();
+        if (name == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Uyarı',
+                text: 'Proje adı boş bırakılamaz',
+                confirmButtonText: "Tamam"
+            })
+        } else {
+            $.post("https://localhost:44309/Project/storeAdd", {
+                "Name": name,
+                "Link":link
+            }, function (res) {
+                Swal.fire({
+                    title: "Başarılı",
+                    text: res,
+                    confirmButtonText: `Tamam`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "https://localhost:44309/Project/Index"
+                    }
+                })
+            })
+        }
+    }
+</script>
+

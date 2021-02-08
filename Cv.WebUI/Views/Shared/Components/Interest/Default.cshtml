@@ -1,0 +1,15 @@
+﻿@model Cv.WebUI.Models.InterestListViewModel
+
+<div class="resume-section-content">
+    <h2 class="mb-5">Hobilerim</h2>
+    <ul class="fa-ul mb-0">
+        @foreach (var item in Model.Interests)
+        {
+            <li>
+                <span class="fa-li"><i class="fas fa-check"></i></span>
+                @item.Description
+            </li>
+        }
+
+    </ul>
+</div>
