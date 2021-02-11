@@ -54,7 +54,7 @@
                 confirmButtonText: "Tamam"
             })
         } else {
-            $.post("https://localhost:44309/Experience/storeUpdate", {
+            $.post("@Url.Action("storeUpdate","Experience")", {
                 "Id":id,
                 "Title": isyeriAdi,
                 "SubTitle": gorev,

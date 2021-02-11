@@ -44,7 +44,7 @@
 
 
 <script>
-   
+
     function guncelle() {
         var id = $("#id").val();
         var okulAdi = $("#okulAdi").val();
@@ -61,7 +61,7 @@
                 confirmButtonText: "Tamam"
             })
         } else {
-            $.post("https://localhost:44309/Education/storeUpdate", {
+            $.post("@Url.Action("storeUpdate","Education")", {
                 "Id":id,
                 "Title": okulAdi,
                 "SubTitle": fakülteAdi,

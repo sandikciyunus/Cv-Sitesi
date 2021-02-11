@@ -33,7 +33,7 @@
                 confirmButtonText: "Tamam"
             })
         } else {
-            $.post("https://localhost:44309/Project/storeAdd", {
+            $.post("@Url.Action("storeAdd","Project")", {
                 "Name": name,
                 "Link":link
             }, function (res) {

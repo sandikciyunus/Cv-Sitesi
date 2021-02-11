@@ -26,7 +26,7 @@
                 confirmButtonText: "Tamam"
             })
         } else {
-            $.post("https://localhost:44309/Skill/storeAdd", {
+            $.post("@Url.Action("storeAdd","Skill")", {
                 "Description": aciklama
             }, function (res) {
                 Swal.fire({

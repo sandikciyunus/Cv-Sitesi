@@ -28,7 +28,7 @@
                 confirmButtonText: "Tamam"
             })
         } else {
-            $.post("https://localhost:44309/Certification/storeAdd", {
+            $.post("@Url.Action("storeAdd","Certification")", {
                 "Description": aciklama
             }, function (res) {
                     Swal.fire({

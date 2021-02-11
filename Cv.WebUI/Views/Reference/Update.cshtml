@@ -41,7 +41,7 @@
                 confirmButtonText: "Tamam"
             })
         } else {
-            $.post("https://localhost:44309/Reference/storeUpdate", {
+            $.post("@Url.Action("storeUpdate","Reference")", {
                 "Id":id,
                 "FullName": name,
                 "Unvan": unvan,

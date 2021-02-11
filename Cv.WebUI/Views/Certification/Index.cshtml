@@ -37,7 +37,7 @@
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                $.post("https://localhost:44309/Certification/delete", {
+                $.post("@Url.Action("delete","Certification")", {
                     "Id": id
                 }, function (res) {
                         Swal.fire({

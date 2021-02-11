@@ -46,7 +46,7 @@
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                $.post("https://localhost:44309/Education/Delete", {
+                $.post("@Url.Action("Delete","Education")", {
                     "Id": id
                 }, function (res) {
                         Swal.fire({

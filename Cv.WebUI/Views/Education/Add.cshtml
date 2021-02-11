@@ -43,7 +43,7 @@
 
 
 <script>
-  
+
 
     function ekle() {
         var okulAdi = $("#okulAdi").val();
@@ -60,7 +60,7 @@
                 confirmButtonText: "Tamam"
             })
         } else {
-            $.post("https://localhost:44309/Education/storeAdd", {
+            $.post("@Url.Action("storeAdd","Education")", {
                 "Title": okulAdi,
                 "SubTitle": fakülteAdi,
                 "Description": bolum,
